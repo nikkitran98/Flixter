@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		CE9A6B9E2A2F962200039D78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A6B9D2A2F962200039D78 /* AppDelegate.swift */; };
 		CE9A6BA02A2F962200039D78 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A6B9F2A2F962200039D78 /* SceneDelegate.swift */; };
-		CE9A6BA22A2F962200039D78 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A6BA12A2F962200039D78 /* ViewController.swift */; };
-		CE9A6BA52A2F962200039D78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE9A6BA32A2F962200039D78 /* Main.storyboard */; };
+		CE9A6BA22A2F962200039D78 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A6BA12A2F962200039D78 /* MovieViewController.swift */; };
 		CE9A6BA72A2F962400039D78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9A6BA62A2F962400039D78 /* Assets.xcassets */; };
 		CE9A6BAA2A2F962400039D78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE9A6BA82A2F962400039D78 /* LaunchScreen.storyboard */; };
 		CE9A6BB52A2F962400039D78 /* FlixterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A6BB42A2F962400039D78 /* FlixterTests.swift */; };
 		CE9A6BC02A2F962400039D78 /* FlixterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A6BBF2A2F962400039D78 /* FlixterUITests.swift */; };
+		CE9A6BCE2A2FB7D400039D78 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A6BCD2A2FB7D400039D78 /* MovieCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +38,7 @@
 		CE9A6B9A2A2F962200039D78 /* Flixter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flixter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9A6B9D2A2F962200039D78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE9A6B9F2A2F962200039D78 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE9A6BA12A2F962200039D78 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CE9A6BA42A2F962200039D78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE9A6BA12A2F962200039D78 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		CE9A6BA62A2F962400039D78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE9A6BA92A2F962400039D78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE9A6BAB2A2F962400039D78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		CE9A6BBB2A2F962400039D78 /* FlixterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlixterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9A6BBF2A2F962400039D78 /* FlixterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixterUITests.swift; sourceTree = "<group>"; };
 		CE9A6BC12A2F962400039D78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE9A6BCD2A2FB7D400039D78 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +101,11 @@
 			children = (
 				CE9A6B9D2A2F962200039D78 /* AppDelegate.swift */,
 				CE9A6B9F2A2F962200039D78 /* SceneDelegate.swift */,
-				CE9A6BA12A2F962200039D78 /* ViewController.swift */,
-				CE9A6BA32A2F962200039D78 /* Main.storyboard */,
+				CE9A6BA12A2F962200039D78 /* MovieViewController.swift */,
 				CE9A6BA62A2F962400039D78 /* Assets.xcassets */,
 				CE9A6BA82A2F962400039D78 /* LaunchScreen.storyboard */,
 				CE9A6BAB2A2F962400039D78 /* Info.plist */,
+				CE9A6BCD2A2FB7D400039D78 /* MovieCell.swift */,
 			);
 			path = Flixter;
 			sourceTree = "<group>";
@@ -233,7 +233,6 @@
 			files = (
 				CE9A6BAA2A2F962400039D78 /* LaunchScreen.storyboard in Resources */,
 				CE9A6BA72A2F962400039D78 /* Assets.xcassets in Resources */,
-				CE9A6BA52A2F962200039D78 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,8 +257,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9A6BA22A2F962200039D78 /* ViewController.swift in Sources */,
+				CE9A6BA22A2F962200039D78 /* MovieViewController.swift in Sources */,
 				CE9A6B9E2A2F962200039D78 /* AppDelegate.swift in Sources */,
+				CE9A6BCE2A2FB7D400039D78 /* MovieCell.swift in Sources */,
 				CE9A6BA02A2F962200039D78 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,14 +296,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CE9A6BA32A2F962200039D78 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE9A6BA42A2F962200039D78 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CE9A6BA82A2F962400039D78 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
