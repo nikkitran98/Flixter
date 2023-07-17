@@ -12,16 +12,17 @@ class MovieCell: UITableViewCell {
     
     var posterView = UIImageView()
     var titleLabel = UILabel()
-    //var synopsisLabel = UILabel()
+    var synopsisLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         posterView.clipsToBounds = true
+        posterView.contentMode = .scaleAspectFill
         titleLabel.numberOfLines = 0
-        //synopsisLabel.numberOfLines = 0
+        synopsisLabel.numberOfLines = 0
         
         addSubview(titleLabel)
-        //addSubview(synopsisLabel)
+        addSubview(synopsisLabel)
         addSubview(posterView)
         
         configurePosterView()
@@ -32,10 +33,11 @@ class MovieCell: UITableViewCell {
     }
     
     func configurePosterView() {
-        posterView.frame = CGRect(x: 10, y: 10, width: 20, height: 100)
-        titleLabel.font = UIFont.systemFont(ofSize: 12)
-        titleLabel.frame = CGRect(x: 10, y: 10, width: 300, height: 40)
-        //synopsisLabel.frame = CGRect(x: posterView.frame.width + 10, y: 15, width: 20, height: 100)
+        posterView.frame = CGRect(x: 10, y: 10, width: 60, height: 80)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        titleLabel.frame = CGRect(x: CGRectGetMaxX(posterView.frame) + 5, y: 10, width: 300, height: 15)
+        synopsisLabel.font = UIFont.systemFont(ofSize: 12)
+        synopsisLabel.frame = CGRect(x: CGRectGetMaxX(posterView.frame) + 5, y: CGRectGetMaxY(titleLabel.frame) , width: 300, height: 75)
         layoutIfNeeded()
     }
 }
