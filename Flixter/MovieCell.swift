@@ -1,10 +1,3 @@
-//
-//  MovieCellTableViewCell.swift
-//  Flixter
-//
-//  Created by Nikki Tran on 6/6/23.
-//
-
 import UIKit
 import CoreGraphics
 
@@ -13,31 +6,32 @@ class MovieCell: UITableViewCell {
     var posterView = UIImageView()
     var titleLabel = UILabel()
     var synopsisLabel = UILabel()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         posterView.clipsToBounds = true
         posterView.contentMode = .scaleAspectFill
-        titleLabel.numberOfLines = 0
-        synopsisLabel.numberOfLines = 0
         
+        titleLabel.numberOfLines = 0
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        synopsisLabel.numberOfLines = 0
+        synopsisLabel.font = UIFont.systemFont(ofSize: 16)
+        
+        addSubview(posterView)
         addSubview(titleLabel)
         addSubview(synopsisLabel)
-        addSubview(posterView)
-        
-        configurePosterView()
+    }
+    
+    override func layoutSubviews() {
+        posterView.frame = CGRectMake(10, 10, 60, 80)
+        titleLabel.frame = CGRectMake(CGRectGetMaxX(posterView.frame) + 5, 10, 300, 16)
+        synopsisLabel.frame = CGRectMake(CGRectGetMaxX(posterView.frame) + 5, CGRectGetMaxY(titleLabel.frame) + 5, 300, 75)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configurePosterView() {
-        posterView.frame = CGRect(x: 10, y: 10, width: 60, height: 80)
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        titleLabel.frame = CGRect(x: CGRectGetMaxX(posterView.frame) + 5, y: 10, width: 300, height: 15)
-        synopsisLabel.font = UIFont.systemFont(ofSize: 12)
-        synopsisLabel.frame = CGRect(x: CGRectGetMaxX(posterView.frame) + 5, y: CGRectGetMaxY(titleLabel.frame) , width: 300, height: 75)
-        layoutIfNeeded()
-    }
 }
