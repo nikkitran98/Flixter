@@ -8,6 +8,9 @@ class MovieViewController: UIViewController {
     private let tableView = UITableView()
     private let refreshControl = UIRefreshControl()
     private var movies = [Result]()
+    private var filteredMovies = [Result]()
+    private let searchBar = UISearchBar()
+    private var inSearchMode = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,10 @@ class MovieViewController: UIViewController {
         tableView.insertSubview(refreshControl, at: 0)
         
         refreshControl.addTarget(self, action: #selector(fetchMovies), for: .valueChanged)
+        
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        navigationItem.titleView = searchBar
         
         view.addSubview(tableView)
     }
@@ -60,17 +67,23 @@ class MovieViewController: UIViewController {
 
 extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return inSearchMode ? filteredMovies.count : movies.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseIdentifier) as! MovieCell
-        let movie = movies[indexPath.row]
+        let movie = inSearchMode ? filteredMovies[indexPath.row] : movies[indexPath.row]
         let title = movie.title
         let overview = movie.overview
         let baseURLString = "https://image.tmdb.org/t/p/w500"
         let posterURLString = movie.poster_path
         let fullPosterString = baseURLString + posterURLString
-        let url = URL(string: fullPosterString)
+        guard let url = URL(string: fullPosterString) else { return cell }
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: url)
+            DispatchQueue.main.async {
+                cell.posterView.image = UIImage(data: data!)
+            }
+        }
 //        let movie = movies[indexPath.row]
 //        let title = movie["title"] as! String
 //        let overview = movie["overview"] as! String
@@ -81,12 +94,12 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
 //
         cell.titleLabel.text = title
         cell.synopsisLabel.text = overview
-        cell.posterView.sd_setImage(with: url)
+        //cell.posterView.sd_setImage(with: url)
         
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movie = movies[indexPath.row]
+        let movie = inSearchMode ? filteredMovies[indexPath.row] : movies[indexPath.row]
         let title = movie.title
         let overview = movie.overview
         let baseURLString = "https://image.tmdb.org/t/p/w500"
@@ -102,5 +115,29 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         let controller = DetailsViewController(title: title, synopsis: overview, url: url)
 //
         navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension MovieViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" || searchBar.text == nil {
+            inSearchMode = false
+            tableView.reloadData()
+            view.endEditing(true)
+        } else {
+            inSearchMode = true
+            filteredMovies = movies.filter({ $0.title.lowercased().range(of: searchText.lowercased()) != nil })
+            tableView.reloadData()
+        }
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = false
+        self.searchBar.text = ""
+        self.searchBar.resignFirstResponder()
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+        self.searchBar.becomeFirstResponder()
     }
 }
